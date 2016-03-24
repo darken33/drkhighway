@@ -1,4 +1,4 @@
-The Highway v1.0
+The Highway v1.0.1
 ------------------------------------------------------------------------
 
 Introduction
@@ -50,8 +50,11 @@ The Highway is a Free Software, so it has the four following freedoms :
 
 Changelog
 ---------
+v1.0.1 : 
+  - Bug on back button fixed on Android
+  
 v1.0 : 
-  - Firs release of "The Highway"
+  - First release of "The Highway"
   
 News & Download
 ---------------   

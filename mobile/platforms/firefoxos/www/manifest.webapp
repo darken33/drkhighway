@@ -3,7 +3,7 @@
     "installs_allowed_from": [
         "*"
     ],
-    "version": "1.0",
+    "version": "1.0.1",
     "name": "The Highway",
     "description": "A simple car race game.",
     "developer": {

@@ -5,7 +5,7 @@
  * Ce logiciel est sous license GNU Genral Public License v3.0
  */ 
  
-var game_version  = "1.0";
+var game_version  = "1.0.1";
 var navplay = false;
 var ready = false;
 var popclosed = false;
@@ -155,29 +155,7 @@ function updateMenu() {
 /**
  * Gestion du bouton retour
  */ 
-function onBackButton() {
-	if ($('#param').css('display') == 'block') {
-		updateParam();
-		showPageTitre();
-	}	
-	else if ($('#aide').css('display') == 'block') {
-		showPageTitre();
-	}
-	else if ($('#dons').css('display') == 'block') {
-		showPageTitre();
-	}
-	else if ($('#score').css('display') == 'block') {
-		quitscore();
-	}
-	else if ($('#hsc_today').css('display') == 'block') {
-		quithscl();
-	}
-	else if ($('#hsc_internet').css('display') == 'block') {
-		quithsci();
-	}
-	else {
-		quit();
-	}
+function onBackButton() { 
 }
 
 /**
