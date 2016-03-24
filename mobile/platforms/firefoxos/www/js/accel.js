@@ -1,32 +1,18 @@
-var lastX,lastY,lastZ;
-var moveCounter = 0;
-
 /**
  * updateAcceleration() - Code pour l'accelerometer
  */ 			
 function updateAcceleration(a) {
-	if(!lastX) {
-		lastX = Math.round(a.x * 100);
-		lastY = Math.round(a.y * 100);
-		lastZ = Math.round(a.z * 100);
-		return;
+	ax = Math.round(a.x * 100);
+//	$("#acc").html(ax);
+	if ( ax > 50) {
+		carSpeed = -1 * carSpeedMax
 	}
-
-	var deltaX, deltaY, deltaZ;
-	deltaX = Math.round(a.x * 100)-lastX;
-	deltaY = Math.round(a.y * 100)-lastY;
-	deltaZ = Math.round(a.z * 100)-lastZ;
-	if (deltaX > 50 && carSpeed > -150 ) {
-		carSpeed -= 150; 
+	else if (ax < -50) {
+		 carSpeed = carSpeedMax
 	}
-	if (deltaX < -50 && carSpeed < 150) {
-		carSpeed += 150; 
+	else {
+		 carSpeed = 0;
 	}
-	//if (deltaY > 150) vitesse=350; 
-	//$("#score").html("x: "+deltaX+", y:"+deltaY+", z:"+deltaZ);
-	lastX = Math.round(a.x * 100);
-	lastY = Math.round(a.y * 100);
-	lastZ = Math.round(a.z * 100);
 }
 
 /**
@@ -39,7 +25,7 @@ function startWatch() {
     y: null,
     z: null
   }
-  var options = { frequency: 250 };  // Update acceleration every quarter second
+  var options = { frequency: 25 };  // Update acceleration every quarter second
   watchID = navigator.accelerometer.watchAcceleration(updateAcceleration, function onError() {
     console.log('Some problem has occurred in reading the accelerometer.');
   }, options);

@@ -6,8 +6,8 @@
  */ 
 
 var cfgLoaded = 0;
-var cfgToLoad = 7;
-var game_options = { "name" : "Player 1", "helponstart" : true, "soundactive" : true, "sharescore" : false, "lang" : "en", "coins" : 0, "convert" : true };
+var cfgToLoad = 8;
+var game_options = { "name" : "Player 1", "helponstart" : true, "soundactive" : true, "sharescore" : false, "lang" : "en", "coins" : 0, "convert" : true, "accelerometer" : false };
 var new_install = true;
 
 /**
@@ -88,6 +88,14 @@ function loadConfig() {
 			}
 			activateApp();
 		}); 
+		asyncStorage.getItem('accelerometer', function(value) {
+			cfgLoaded++;
+			if (value != null) {
+				new_install = false;
+				game_options.accelerometer=(value=="true");
+			}
+			activateApp();
+		}); 
 	}
 	else {
 		var name = window.localStorage.getItem('name'); 
@@ -97,6 +105,7 @@ function loadConfig() {
 		var lang = window.localStorage.getItem('lang'); 
 		var coins = window.localStorage.getItem('coins'); 
 		var convert = window.localStorage.getItem('convert'); 
+		var accelerometer = window.localStorage.getItem('accelerometer'); 
 		if (name != null) game_options.name = name;
 		if (helponstart != null) game_options.helponstart = (helponstart == "true");
 		if (soundactive != null) game_options.soundactive = (soundactive == "true");
@@ -104,6 +113,7 @@ function loadConfig() {
 		if (lang != null) game_options.lang = lang;
 		if (coins != null) game_options.coins = coins;
 		if (convert != null) game_options.convert = (convert == "true");
+		if (accelerometer != null) game_options.accelerometer = (accelerometer == "true");
 		cfgLoaded = cfgToLoad;
 		activateApp()
 	}
@@ -121,7 +131,7 @@ function saveConfig() {
 		asyncStorage.setItem('lang', game_options.lang, function(value) { }); 
 		asyncStorage.setItem('coins', ""+game_options.coins, function(value) { }); 
 		asyncStorage.setItem('convert', (game_options.convert ? "true" : "false"), function(value) { }); 
-	//	asyncStorage.setItem('accelerometer', (game_options.accelerometer ? "true" : "false"), function(value) { }); 
+		asyncStorage.setItem('accelerometer', (game_options.accelerometer ? "true" : "false"), function(value) { }); 
 	}
 	else {
 		window.localStorage.setItem('name', game_options.name); 
@@ -131,5 +141,6 @@ function saveConfig() {
 		window.localStorage.setItem('lang', game_options.lang); 
 		window.localStorage.setItem('coins', ""+game_options.coins); 
 		window.localStorage.setItem('convert', (game_options.convert ? "true" : "false")); 
+		window.localStorage.setItem('accelerometer', (game_options.accelerometer ? "true" : "false")); 
 	}
 }

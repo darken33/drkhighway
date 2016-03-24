@@ -44,8 +44,8 @@ var twoprob=0;
 var thread_adversaire = null;
 var count=0;
 var delai = 0;
-var delaiMax = 2000;
-var delaiMin = 1600;
+var delaiMax = 2500;
+var delaiMin = 1500;
 var second = 1000;
 var gameEnded = true;
 /* gestion des pieces */
@@ -57,18 +57,26 @@ var cprob=0;
 var brakeCost=5;
 var hornCost=10;
 var planeCost=20;
-var planeDuration=5;
+var planeDuration=10;
+var hornDuration=5;
+var hornCol=0;
+var horn_active=false;
 /* gestion du canvas */
 var canvasLoaded = false;
 var scale = 1;
 var xMin=55;
+var xCen=0;
+var hWidth=0;
 var xMax=325;
 var yMax=800;
 var yMin=-210;
-var timerMax=5;
 var timer=0;
 var timer_thread=null;
 var option_valide=false;
+var hWindow = 0;
+var pIcon = 0;
+var bIcon = 0;
+var hIcon = 0;
 /**
  * Initiailisation du canvas
  */ 
@@ -133,6 +141,11 @@ function initCanvas() {
 		scale=240/480;
 		icon=32;
 	}	
+	hWindow = Math.floor(window.innerWidth / 2);
+	hIcon = Math.floor(window.innerWidth * 0.8);
+	bIcon = hWindow;
+	pIcon = Math.floor(window.innerWidth * 0.2);
+	hxIcon=Math.floor(icon/2);
 }
 
 /**
@@ -148,8 +161,10 @@ function handleComplete() {
 	ground.y = 0;
 	// On crée la voiture
 	car01Img = loader.getResult("car01");
+	xCen = Math.floor((width - car01Img.width) / 2)
+	hWidth = Math.floor((car01Img.width) / 2)
 	car01 = new createjs.Bitmap(car01Img);
-	car01.x = (width - car01Img.width) / 2;
+	car01.x = xCen;
 	car01.y = height - car01Img.height - 5;
 	// On crée la voiture en mode avion
 	plane01Img = loader.getResult("plane01");
@@ -166,9 +181,9 @@ function handleComplete() {
  */
 function demarre() {
 	// on place la voiture
-	car01.x = (width - car01Img.width) / 2;
+	car01.x = xCen;
 	car01.y = height - car01Img.height - 5;
-	plane01.x = (width - plane01Img.width) / 2;
+	plane01.x = Math.floor((width - plane01Img.width) / 2);
 	plane01.y = height - plane01Img.height - 5;
 	// on initiailise les vitesses
 	vitesse=0;
@@ -182,6 +197,7 @@ function demarre() {
 	gameEnded = false;
 	nbcoins=0;
 	score=0;
+	count=0;
 	option_valide=true;
 	// on initialise les pieces et adversaires
 	adversaires=[];
@@ -223,6 +239,7 @@ function demarre() {
 		// deuxieme moteur pour eviter la coupure du replay
 		setTimeout(function() { m_motor2.play(); }, second);
 	}
+	if (game_options.accelerometer) setTimeout(startWatch, second);
 }	
 
 /**
@@ -230,7 +247,7 @@ function demarre() {
  */
 function special(event) {
 	// On freine
-	if (event.clientX > ((window.innerWidth - icon) / 2) && event.clientX < ((window.innerWidth + icon) / 2)) {
+	if (event.clientX > (bIcon - hxIcon) && event.clientX < (bIcon + hxIcon)) {
 		if (game_options.coins >= brakeCost) {
 			option_valide = false;
 			setTimeout(function(){option_valide=true;},second);			
@@ -244,21 +261,22 @@ function special(event) {
 		}
 	}
 	// On klaxonne
-	else if (event.clientX > (window.innerWidth * 0.8 - icon * 0.5) && event.clientX < (window.innerWidth * 0.8 + icon * 0.5)) {
+	else if (event.clientX > (hIcon - hxIcon) && event.clientX < (hIcon + hxIcon)) {
 		if (game_options.coins >= hornCost) {
 			option_valide = false;
-			setTimeout(function(){option_valide=true;},second);			
+			horn_active = true;
+			setTimeout(function(){option_valide=true; horn_active=false;},hornDuration * second);			
 			game_options.coins-=hornCost;
 			earnedcoins-=hornCost;
 			if (earnedcoins<0) earnedcoins=0;
-			pos = xMax;
-			if (car01.x+(car01Img.width/2) < 175) pos = xMin;
-			else if (car01.x+(car01Img.width/2) < 305) pos = (width - car01Img.width) / 2;
+			hornCol = xMax;
+			if (car01.x+hWidth < 175) hornCol = xMin;
+			else if (car01.x+hWidth < 305) hornCol = xCen;
 			if (game_options.soundactive) m_horn2.play();
 			for (i = adversaires.length; i > 0; i--) {
-				if (adversaires[i-1].x == pos) {
+				if (adversaires[i-1].x == hornCol) {
 					score+=100;
-					showcoin = (Math.floor((Math.random() * 100) + 1) < coinprob);
+					showcoin = true;
 					carsplan.removeChild(adversaires[i-1]);
 					adversaires.splice(i-1,1);
 				}
@@ -266,17 +284,17 @@ function special(event) {
 		}
 	}
 	// On se transforme en jet
-	else if (event.clientX > (window.innerWidth * 0.2 - icon * 0.5) && event.clientX < (window.innerWidth * 0.2 + icon * 0.5)) {
+	else if (event.clientX > (pIcon - hxIcon) && event.clientX < (pIcon + hxIcon)) {
 		if (game_options.coins >= planeCost) {
 			option_valide = false;
-			setTimeout(function(){option_valide=true;},5*second);			
+			setTimeout(function(){option_valide=true;},planeDuration*second);			
 			game_options.coins-=planeCost;
 			earnedcoins-=planeCost;
 			if (earnedcoins<0) earnedcoins=0;
 			if (game_options.soundactive) m_takeoff.play();
 			stage.removeChild(car01);
 			stage.addChild(plane01);
-			timer=timerMax;
+			timer=planeDuration;
 			timer_thread=setInterval(timerDown, second);	
 		}
 	}
@@ -298,7 +316,7 @@ function moveCar(event) {
 	event.preventDefault();
 	event.stopPropagation();
 	if (event.clientY < window.innerHeight - icon) {
-		if (event.clientX > (window.innerWidth / 2)) {
+		if (event.clientX > hWindow) {
 			carSpeed = carSpeedMax;
 		}
 		else {
@@ -355,13 +373,13 @@ function tick(event) {
 	// on calcule le deltaS pour la fluidité
 	var deltaS = event.delta / second;
 	// On deplace l'arrière plan
-	ground.y = (ground.y+deltaS*vitesse) % ground.tileH;
+	ground.y = Math.floor((ground.y+deltaS*vitesse) % ground.tileH);
 	// gestion des options
 	updateOptions();
 	// On déplace la voiture si besoin
 	if ((car01.x > 55 && carSpeed < 0) || (carSpeed > 0 && car01.x < 325)) {
-		car01.x = (car01.x+deltaS*carSpeed);
-		plane01.x = (plane01.x+deltaS*carSpeed);
+		car01.x = Math.floor(car01.x+deltaS*carSpeed);
+		plane01.x = Math.floor(plane01.x+deltaS*carSpeed);
 	}
 	// On met a jour  la vitesse
 	if (vitesse<700) vitesse+=5;
@@ -370,7 +388,7 @@ function tick(event) {
 	}
 	// Les pièces
 	for (j = coins.length; j > 0; j--) {
-		coins[j-1].y = coins[j-1].y+deltaS*(vitesse);
+		coins[j-1].y = Math.floor(coins[j-1].y+deltaS*(vitesse));
 		if (testRamasse(j-1)) {
 			game_options.coins++;
 			earnedcoins++; 
@@ -385,7 +403,7 @@ function tick(event) {
 	}
 	// On passe en revue les adversaires
 	for (i = adversaires.length; i > 0; i--) {
-		adversaires[i-1].y = adversaires[i-1].y+deltaS*(vitesse+adversaireSpeed);
+		adversaires[i-1].y = Math.floor(adversaires[i-1].y+deltaS*(vitesse+adversaireSpeed));
 		if (timer==0 && testCollision(i-1)) { 
 			gameEnded = true;
 		}
@@ -417,16 +435,18 @@ function updateAdversaire() {
 	if (adversaires.length < 3) {
 		var car = Math.floor((Math.random() * 8) + 2); 	  
 		var pro = (Math.floor((Math.random() * 100) + 1) < twoprob); 	  
-		var pos = (width - 100);
-		if (car01.x+(car01Img.width/2) < 175) {
-			pos = (Math.floor((Math.random() * 2) + 1) == 1 ? xMin : (Math.floor((Math.random() * 2) + 1) == 1 ? (width - car01Img.width) / 2 : xMax)); 
-		}	
-		else if (car01.x+(car01Img.width/2) < 305) {
-			pos = (Math.floor((Math.random() * 2) + 1) == 1 ? (width - car01Img.width) / 2 : (Math.floor((Math.random() * 2) + 1) == 1 ? xMin : xMax)); 
-		}	
+		var r1 = (Math.floor((Math.random() * 3) + 1));
+		var r2 = (Math.floor((Math.random() * 2) + 1));
+		var pos = xMin;
+		if (horn_active) {
+			if (hornCol == xMin) pos = (r2==1 ? xCen : xMax);
+			else if (hornCol == xCen) pos = (r2==1 ? xMin : xMax);
+			else pos = (r2==1 ? xMin : xCen);	
+			pro = false;
+		}
 		else {
-			pos = (Math.floor((Math.random() * 2) + 1) == 1 ? xMax : (Math.floor((Math.random() * 2) + 1) == 1 ? xMin : (width - car01Img.width) / 2)); 
-		}	
+			pos = (r1==1 ? xMin : (r1==2 ? xCen : xMax));
+		}
 		adversaires.push(new createjs.Bitmap(loader.getResult("car0"+car)));
 		adversaires[adversaires.length-1].x = pos; 
 		adversaires[adversaires.length-1].y = yMin;
@@ -437,10 +457,10 @@ function updateAdversaire() {
 			adversaires.push(new createjs.Bitmap(loader.getResult("car0"+car2)));
 			var pos2 = Math.floor((Math.random() * 2) + 1); 	  
 			if (pos==xMin) {
-				adversaires[adversaires.length-1].x = (pos2 == 1 ? (width - car01Img.width) / 2 : xMax); 
+				adversaires[adversaires.length-1].x = (pos2 == 1 ? xCen : xMax); 
 			}
 			else if (pos==xMax) {
-				adversaires[adversaires.length-1].x = (pos2 == 1 ? xMin : (width - car01Img.width) / 2); 
+				adversaires[adversaires.length-1].x = (pos2 == 1 ? xMin : xCen); 
 			}
 			else {
 				adversaires[adversaires.length-1].x = (pos2 == 1 ? xMin : xMax); 
@@ -470,6 +490,7 @@ function updateAdversaire() {
 		if (twoprob < 75) {
 			twoprob += 15;
 		}
+		//$("#acc").html(delai + " / " + adversaireSpeed + " / " + twoprob);
 		count=0;
 	}
 }
@@ -568,10 +589,11 @@ function endGame() {
 	option_valide=false;
 	createjs.Ticker.reset();
 	clearInterval(thread_adversaire);
+	if (game_options.accelerometer) stopWatch();
 	thread_adversaire=null;
 	stage.removeAllChildren();
 	createjs.Ticker.removeAllEventListeners();
-	car01.x = (width - 100) / 2;
+	car01.x = xCen;
 	car01.y = height - 207;
 	vitesse=0;
 	carSpeed=0;

@@ -5,7 +5,7 @@
  * Ce logiciel est sous license GNU Genral Public License v3.0
  */ 
  
-var game_version  = "1.1";
+var game_version  = "1.2";
 var navplay = false;
 var ready = false;
 var popclosed = false;
@@ -267,17 +267,17 @@ function param() {
 	$('#l_game_sound').html(texte_option_sons[game_options.lang]);
 	$('#l_game_score').html(texte_option_share[game_options.lang]);
 	$('#l_game_convert').html(texte_option_convert[game_options.lang]);
-//	$('#l_game_accel').html(texte_option_accel[game_options.lang]);
+	$('#l_game_accel').html(texte_option_accel[game_options.lang]);
 	if (game_options.helponstart) $('#game_help').prop('checked', true);
 	if (game_options.soundactive) $('#game_sound').prop('checked', true);
 	if (game_options.sharescore) $('#game_score').prop('checked', true);
 	if (game_options.convert) $('#game_convert').prop('checked', true);
-//	if (game_options.accelerometer) $('#game_accel').prop('checked', true);
+	if (game_options.accelerometer) $('#game_accel').prop('checked', true);
 	$('#game_sound').checkboxradio().checkboxradio("refresh");
 	$('#game_help').checkboxradio().checkboxradio("refresh");
 	$('#game_score').checkboxradio().checkboxradio("refresh");
 	$('#game_convert').checkboxradio().checkboxradio("refresh");
-//	$('#game_accel').checkboxradio().checkboxradio("refresh");
+	$('#game_accel').checkboxradio().checkboxradio("refresh");
 	showPageParam();
 }
 
@@ -291,7 +291,7 @@ function updateParam() {
 	game_options.soundactive = $('#game_sound').is(":checked");
 	game_options.sharescore = $('#game_score').is(":checked");
 	game_options.convert = $('#game_convert').is(":checked");
-//	game_options.accelerometer = $('#game_accel').is(":checked");
+	game_options.accelerometer = $('#game_accel').is(":checked");
 	saveConfig();
 	updateMenu();
 }
@@ -305,7 +305,6 @@ function startGame() {
 		$.mobile.changePage('#game', 'none', true, true);	
 		$("#game").on("vmousedown", moveCar);
 		$("#game").on("vmouseup", stopCar);
-//		if (game_options.accelerometer) startWatch();
 		demarre();
 	}
 	else {

@@ -1,9 +1,9 @@
-The Highway v1.1
+The Highway v1.2
 ------------------------------------------------------------------------
 
 Introduction
 ------------
-The Highway v1.0 is simple race car game, where you must travel the 
+The Highway is simple race car game, where you must travel the 
 farthest distance without hitting another car. 
 
 This game is developed and maintained by Philippe Bousquet 
@@ -57,6 +57,12 @@ The Highway is a Free Software, so it has the four following freedoms :
 
 Changelog
 ---------
+v1.2 :
+  - Game performance were really improved
+  - You can use accelerometer to drive your car
+  - Options improved : horn (5 seconds) and wings (10 seconds)
+  - Minor bugs fixed
+
 v1.1 : 
   - Collect gold coins to buy options or make higher score
   - Brake : Slow the frame rate (5 coins).

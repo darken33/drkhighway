@@ -16,7 +16,7 @@
 		<script src="js/config.js" type="text/javascript"></script>  
 		<script src="js/canvas.js" type="text/javascript"></script>  
 		<script src="js/sound.js" type="text/javascript"></script>  
-<!-- 	<script src="js/accel.js" type="text/javascript"></script>  -->
+		<script src="js/accel.js" type="text/javascript"></script>
 		<script src="js/highscores.js" type="text/javascript"></script>  
 		<script src="js/game.js" type="text/javascript"></script>
 	</head>
@@ -86,6 +86,7 @@
 			<div style="position: fixed; top: 0; left: 0; right: 0; text-align: right; z-index: 999; background: none; color: #FFFFFF"><span id="score" style="background: none;">0</span> <img src="images/prize.png" width="12px" height="12px" /></div>
 			<div style="position: fixed; top: 1em; left: 0; right: 0; text-align: right; z-index: 999; background: none; color: #FFFF00"><span id="coins" style="background: none;">0</span> <img src="images/coin-up.png" width="12px" height="12px" /></div>
 			<div style="position: fixed; top: 5em; left: 0; right: 0; text-align: center; z-index: 999; background: none; color: #FFFFFF; font-size: 30pt;"><span id="timer" style="background: none;"></span></div>
+			<div style="position: fixed; top: 2em; left: 0; right: 0; text-align: center; z-index: 999; background: none; color: #FFFFFF; font-size: 12pt;"><span id="acc" style="background: none;"></span></div>
 			<canvas id="myCanvas" width="480" height="720"></canvas>
 			<div id="horn"></div>
 			<div id="plane"></div>
@@ -96,11 +97,11 @@
 			page de Paramètres
 		-->		
 		<div data-role="page" id="param" data-theme="c">
-			<div data-role="header">
+			<div data-role="header" style="position: fixed; top:0; left: 0; right: 0;">
 				<a href="#" id="param_back" data-role="button" data-theme="c" data-icon="carat-l" data-iconpos="notext" data-inline="true">Back</a>
 				<h1 id="txt_param">Settings</h1>
 			</div>
-			<div data-role="content">
+			<div data-role="content" style="margin-top: 2.5em;">
 				<div class="ui-field-contain">
 					<label for="game_lang" id="l_game_lang">Lang :</label>
 					<select id="game_lang" name="game_lang" data-native-menu="true" tabindex="-1">
@@ -117,7 +118,7 @@
 					<fieldset data-role="controlgroup" data-type="vertical">
 						<legend id="l_game_options">Options :</legend>
 						<label><input id="game_help" name="game_help" data-theme="c" type="checkbox"><span id="l_game_help">Help on start</span></label>
-						<!-- <label><input id="game_accel" name="game_accel" data-theme="c" type="checkbox"><span id="l_game_accel">Use Accelerometer</span></label> -->
+						<label><input id="game_accel" name="game_accel" data-theme="c" type="checkbox"><span id="l_game_accel">Use Accelerometer</span></label> 
 						<label><input id="game_sound" name="game_sound" data-theme="c" type="checkbox"><span id="l_game_sound">Play sounds</span></label>
 						<label><input id="game_convert" name="game_convert" data-theme="c" type="checkbox"><span id="l_game_convert">Convert earned coins</span></label>
 						<label><input id="game_score" name="game_score" data-theme="c" type="checkbox"><span id="l_game_score">Share score on Internet</span></label>
