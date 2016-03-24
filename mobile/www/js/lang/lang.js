@@ -28,3 +28,4 @@ var texte_option_langue_es = new Array();
 var texte_loading = new Array();
 var texte_dons_content = new Array();
 var texte_option_accel = new Array();
+var texte_option_convert = new Array();

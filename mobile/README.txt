@@ -1,4 +1,4 @@
-The Highway v1.0.1
+The Highway v1.1
 ------------------------------------------------------------------------
 
 Introduction
@@ -19,8 +19,15 @@ BY-SA.
 
 How to play ?
 ---------------
-Tap the Play button to launch the game, then hold your finger on screen
-left part to go left and the right part to go right. 
+Tap the Play button to launch the game, then hold your finger on screen 
+left part to go left and the right part to go right.
+
+Collect gold coins to buy options :
+  * Brake : Slow the frame rate (5 coins).
+  * Horn : frees your lane (10 coins)
+  * Wings : allows to fly over the highway for 5 seconds (20 coins).
+
+You can keep earned coins or convert them into points (in settings page).
 
 The game is over when you hit another car.
 
@@ -50,6 +57,12 @@ The Highway is a Free Software, so it has the four following freedoms :
 
 Changelog
 ---------
+v1.1 : 
+  - Collect gold coins to buy options or make higher score
+  - Brake : Slow the frame rate (5 coins).
+  - Horn : frees your lane (10 coins)
+  - Wings : allows to fly over the highway for 5 seconds (20 coins).
+
 v1.0.1 : 
   - Bug on back button fixed on Android
   

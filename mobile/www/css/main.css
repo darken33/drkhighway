@@ -82,54 +82,298 @@ table.highscore td {
 	background: none;
 }
 
+#brake {
+	position: fixed; 
+	top: auto; 
+	left: 0; 
+	right: 0; 
+	bottom: 0; 
+	text-align: center; 
+	z-index: 999; 
+	color: #FFFF00; 
+	opacity: 0.5;
+	height: 128px; 
+	background-size: 128px 128px;
+	background-position: 50% 50%;
+	background-repeat:no-repeat;
+}
+.bon {
+	background-image:url('../images/brake_on.png')
+}
+.boff {
+	background-image:url('../images/brake_off.png')
+}
+#horn {
+	position: fixed; 
+	top: auto; 
+	left: 0; 
+	right: 0; 
+	bottom: 0; 
+	text-align: center; 
+	z-index: 900; 
+	color: #FFFF00; 
+	opacity: 0.5;
+	height: 128px; 
+	background-size: 128px 128px;
+	background-position: 80%;
+	background-repeat:no-repeat;
+}
+.hon {
+	background-image:url('../images/horn_on.png')
+}
+.hoff {
+	background-image:url('../images/horn_off.png')
+}
+#plane {
+	position: fixed; 
+	top: auto; 
+	left: 0; 
+	right: 0; 
+	bottom: 0; 
+	text-align: center; 
+	z-index: 900; 
+	color: #FFFF00; 
+	opacity: 0.5;
+	height: 128px; 
+	background-size: 128px 128px;
+	background-position: 20%;
+	background-repeat:no-repeat;
+}
+.pon {
+	background-image:url('../images/plane_on.png')
+}
+.poff {
+	background-image:url('../images/plane_off.png')
+}
+
 /* CSS mode DESKTOP */
 @media only screen and (min-width: 1024px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 1024px 1824px;
+	}
+	#brake {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 20%;
+		background-repeat:no-repeat;
 	}
 }
 @media only screen and (max-width: 1023px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 800px 1425px;
 	}
+	#brake {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 20%;
+		background-repeat:no-repeat;
+	}
 }
 @media only screen and (max-width: 799px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 720px 1282px;
+	}
+	#brake {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 20%;
+		background-repeat:no-repeat;
 	}
 }
 @media only screen and (max-width: 719px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 640px 1140px;
 	}
+	#brake {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 20%;
+		background-repeat:no-repeat;
+	}
 }
 @media only screen and (max-width: 639px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 600px 1069px;
+	}
+	#brake {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 128px; 
+		background-size: 128px 128px;
+		background-position: 20%;
+		background-repeat:no-repeat;
 	}
 }
 @media only screen and (max-width: 599px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 512px 912px;
 	}
+	#brake {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 20%;
+		background-repeat:no-repeat;
+	}
 }
 @media only screen and (max-width: 511px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 480px 855px;
+	}
+	#brake {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 20%;
+		background-repeat:no-repeat;
 	}
 }
 @media only screen and (max-width: 479px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 400px 712px;
 	}
+	#brake {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 20%;
+		background-repeat:no-repeat;
+	}
 }
 @media only screen and (max-width: 399px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 320px 570px;
 	}
+	#brake {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 64px; 
+		background-size: 64px 64px;
+		background-position: 20%;
+		background-repeat:no-repeat;
+	}
 }
 @media only screen and (max-width: 319px) {
 	#game, #titre, #score, #hsc_today, #hsc_internet {
 		background-size: 240px 428px;
+	}
+	#brake {
+		height: 32px; 
+		background-size: 32px 32px;
+		background-position: 50% 50%;
+		background-repeat:no-repeat;
+	}
+	#horn {
+		height: 32px; 
+		background-size: 32px 32px;
+		background-position: 80%;
+		background-repeat:no-repeat;
+	}
+	#plane {
+		height: 32px; 
+		background-size: 32px 32px;
+		background-position: 20%;
+		background-repeat:no-repeat;
 	}
 }

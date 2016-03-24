@@ -38,6 +38,22 @@
 			<source src="./sounds/crash.ogg" type="audio/ogg"> 
 			<source src="./sounds/crash.mp3" type="audio/mpeg"> 
 		</audio>
+		<audio id="cash_snd">
+			<source src="./sounds/cash.ogg" type="audio/ogg"> 
+			<source src="./sounds/cash.mp3" type="audio/mpeg"> 
+		</audio>
+		<audio id="brake_snd">
+			<source src="./sounds/brake.ogg" type="audio/ogg"> 
+			<source src="./sounds/brake.mp3" type="audio/mpeg"> 
+		</audio>
+		<audio id="horn2_snd">
+			<source src="./sounds/horn2.ogg" type="audio/ogg"> 
+			<source src="./sounds/horn2.mp3" type="audio/mpeg"> 
+		</audio>
+		<audio id="takeoff_snd">
+			<source src="./sounds/takeoff.ogg" type="audio/ogg"> 
+			<source src="./sounds/takeoff.mp3" type="audio/mpeg"> 
+		</audio>
 
 		<!-- 
 			page de Chargement
@@ -67,8 +83,13 @@
 			page du Jeu
 		-->	
 		<div data-role="page" id="game" data-theme="c" style="text-align: center;">
-			<div id="score" style="position: fixed; top: 0; left: 0; right: 0; text-align: right; z-index: 999; background: none;">x: 0/0, y: 0/0, z:0/0</div>
+			<div style="position: fixed; top: 0; left: 0; right: 0; text-align: right; z-index: 999; background: none; color: #FFFFFF"><span id="score" style="background: none;">0</span> <img src="images/prize.png" width="12px" height="12px" /></div>
+			<div style="position: fixed; top: 1em; left: 0; right: 0; text-align: right; z-index: 999; background: none; color: #FFFF00"><span id="coins" style="background: none;">0</span> <img src="images/coin-up.png" width="12px" height="12px" /></div>
+			<div style="position: fixed; top: 5em; left: 0; right: 0; text-align: center; z-index: 999; background: none; color: #FFFFFF; font-size: 30pt;"><span id="timer" style="background: none;"></span></div>
 			<canvas id="myCanvas" width="480" height="720"></canvas>
+			<div id="horn"></div>
+			<div id="plane"></div>
+			<div id="brake"></div>
 		</div>
 
 		<!--
@@ -98,6 +119,7 @@
 						<label><input id="game_help" name="game_help" data-theme="c" type="checkbox"><span id="l_game_help">Help on start</span></label>
 						<!-- <label><input id="game_accel" name="game_accel" data-theme="c" type="checkbox"><span id="l_game_accel">Use Accelerometer</span></label> -->
 						<label><input id="game_sound" name="game_sound" data-theme="c" type="checkbox"><span id="l_game_sound">Play sounds</span></label>
+						<label><input id="game_convert" name="game_convert" data-theme="c" type="checkbox"><span id="l_game_convert">Convert earned coins</span></label>
 						<label><input id="game_score" name="game_score" data-theme="c" type="checkbox"><span id="l_game_score">Share score on Internet</span></label>
 					</fieldset>
 				</div>
@@ -151,9 +173,14 @@
 			page de Score
 		-->
 		<div data-role="page" id="score" data-theme="c">
-			<div data-role="content" data-theme="d"  data-form="ui-body-b" class="ui-body ui-body-b ui-corner-all" style="width: 60%; margin-left: auto; margin-right: auto; margin-top:50%; opacity: 0.9; text-align: center;">
-				 <h1>Score</h1>
-				 <h1 id="score_final">126006</h1>
+			<div data-role="content" data-theme="d"  data-form="ui-body-b" class="ui-body ui-body-b ui-corner-all" style="width: 60%; margin-left: auto; margin-right: auto; margin-top:30%; opacity: 0.9; text-align: center;">
+				<h1>Score</h1>
+				<div id="convert_ok" style="display:none;">
+					<h3 id="score_intrm">1000</h3>
+					<h3>+</h3>
+					<h3><span id="score_coins">10</span> <img src="images/coin-up.png" width="14px" height="14px" /> x 100</h3>
+				</div>	
+				<h1 id="score_final" style="color:#FFFF00">126006</h1>
 			</div>
 			<div style="background: none; position: fixed; right: 0; bottom: 0;"><a href="#" id="b_score" data-role="button" data-theme="c" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Next</a></div>
 		</div>		

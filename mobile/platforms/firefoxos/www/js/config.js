@@ -6,8 +6,8 @@
  */ 
 
 var cfgLoaded = 0;
-var cfgToLoad = 5;
-var game_options = { "name" : "Player 1", "helponstart" : true, "soundactive" : true, "sharescore" : false, "lang" : "en" };
+var cfgToLoad = 7;
+var game_options = { "name" : "Player 1", "helponstart" : true, "soundactive" : true, "sharescore" : false, "lang" : "en", "coins" : 0, "convert" : true };
 var new_install = true;
 
 /**
@@ -72,6 +72,22 @@ function loadConfig() {
 			}
 			activateApp();
 		}); 
+		asyncStorage.getItem('coins', function(value) {
+			cfgLoaded++;
+			if (value != null) {
+				new_install = false;
+				game_options.coins=value;
+			}
+			activateApp();
+		}); 
+		asyncStorage.getItem('convert', function(value) {
+			cfgLoaded++;
+			if (value != null) {
+				new_install = false;
+				game_options.convert=(value=="true");
+			}
+			activateApp();
+		}); 
 	}
 	else {
 		var name = window.localStorage.getItem('name'); 
@@ -79,11 +95,15 @@ function loadConfig() {
 		var soundactive = window.localStorage.getItem('soundactive'); 
 		var sharescore = window.localStorage.getItem('sharescore'); 
 		var lang = window.localStorage.getItem('lang'); 
+		var coins = window.localStorage.getItem('coins'); 
+		var convert = window.localStorage.getItem('convert'); 
 		if (name != null) game_options.name = name;
 		if (helponstart != null) game_options.helponstart = (helponstart == "true");
 		if (soundactive != null) game_options.soundactive = (soundactive == "true");
 		if (sharescore != null) game_options.sharescore = (sharescore == "true");
 		if (lang != null) game_options.lang = lang;
+		if (coins != null) game_options.coins = coins;
+		if (convert != null) game_options.convert = (convert == "true");
 		cfgLoaded = cfgToLoad;
 		activateApp()
 	}
@@ -99,6 +119,8 @@ function saveConfig() {
 		asyncStorage.setItem('soundactive', (game_options.soundactive ? "true" : "false"), function(value) { }); 
 		asyncStorage.setItem('sharescore', (game_options.sharescore ? "true" : "false"), function(value) { }); 
 		asyncStorage.setItem('lang', game_options.lang, function(value) { }); 
+		asyncStorage.setItem('coins', ""+game_options.coins, function(value) { }); 
+		asyncStorage.setItem('convert', (game_options.convert ? "true" : "false"), function(value) { }); 
 	//	asyncStorage.setItem('accelerometer', (game_options.accelerometer ? "true" : "false"), function(value) { }); 
 	}
 	else {
@@ -107,5 +129,7 @@ function saveConfig() {
 		window.localStorage.setItem('soundactive', (game_options.soundactive ? "true" : "false")); 
 		window.localStorage.setItem('sharescore', (game_options.sharescore ? "true" : "false")); 
 		window.localStorage.setItem('lang', game_options.lang); 
+		window.localStorage.setItem('coins', ""+game_options.coins); 
+		window.localStorage.setItem('convert', (game_options.convert ? "true" : "false")); 
 	}
 }
