@@ -1,18 +1,25 @@
 /**
  * updateAcceleration() - Code pour l'accelerometer
  */ 			
+// Position de départ
+var initialReading = {
+    x: null,
+    y: null,
+    z: null
+}
+var mult = 150;
+/**
+ * updateAcceleration() 
+ */ 			
 function updateAcceleration(a) {
-	ax = Math.round(a.x * 100);
-//	$("#acc").html(ax);
-	if ( ax > 50) {
-		carSpeed = -1 * carSpeedMax
+	
+	if (initialReading.x == null) {
+		initialReading.x = a.x;
+		initialReading.y = a.y;
+		initialReading.z = a.z;
 	}
-	else if (ax < -50) {
-		 carSpeed = carSpeedMax
-	}
-	else {
-		 carSpeed = 0;
-	}
+	// Calculer le déplacement sur x et y
+	carSpeed = (Math.round((a.x - initialReading.x) *mult) * -1);
 }
 
 /**
@@ -20,15 +27,10 @@ function updateAcceleration(a) {
  */ 		
 var watchID;
 function startWatch() {
-  var previousReading = {
-    x: null,
-    y: null,
-    z: null
-  }
-  var options = { frequency: 25 };  // Update acceleration every quarter second
-  watchID = navigator.accelerometer.watchAcceleration(updateAcceleration, function onError() {
-    console.log('Some problem has occurred in reading the accelerometer.');
-  }, options);
+	var options = { frequency: 25 };  // Update acceleration every quarter second
+	watchID = navigator.accelerometer.watchAcceleration(updateAcceleration, function onError() {
+		console.log('Some problem has occurred in reading the accelerometer.');
+	}, options);
 }
  
 /**
@@ -36,6 +38,9 @@ function startWatch() {
  */  
 function stopWatch() {
   if (watchID) {
+	initialReading.x = null;
+	initialReading.y = null;
+	initialReading.z = null;
     navigator.accelerometer.clearWatch(watchID);
     watchID = null;
   }

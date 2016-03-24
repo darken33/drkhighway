@@ -1,4 +1,4 @@
-The Highway v1.2
+The Highway v1.2.1
 ------------------------------------------------------------------------
 
 Introduction
@@ -57,6 +57,10 @@ The Highway is a Free Software, so it has the four following freedoms :
 
 Changelog
 ---------
+v1.2.1 :
+  - Accelerometer improved to drive the car
+  - French mistake on leaving game question
+
 v1.2 :
   - Game performance were really improved
   - You can use accelerometer to drive your car
