@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="fr.free.darken33.games.drkhighway" version="1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <platform name="firefoxos">
         <icon height="128" src="icon/icon-128.png" width="128" />
         <icon height="60" src="icon/icon-60.png" width="60" />
@@ -17,7 +17,7 @@
     <description>
         A simple car race game.
     </description>
-    <author email="darken33@free.fr" href="http://darken33.free.fr">
+    <author email="darken33@free.fr" href="http://darken33.net/wp/index.php/2015/01/20/the-highway-a-simple-car-race-game/">
         Philippe Bousquet
     </author>
     <content src="index.html" />

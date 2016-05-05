@@ -5,7 +5,7 @@
  * Ce logiciel est sous license GNU Genral Public License v3.0
  */ 
  
-var game_version  = "1.2.1";
+var game_version  = "1.3";
 var navplay = false;
 var ready = false;
 var popclosed = false;

@@ -1,4 +1,4 @@
-The Highway v1.2.1
+The Highway v1.3
 ------------------------------------------------------------------------
 
 Introduction
@@ -57,6 +57,10 @@ The Highway is a Free Software, so it has the four following freedoms :
 
 Changelog
 ---------
+v1.3 : 
+  - Cordova upgrade due to security alert
+  - REST Service moved on http://darken33.net/
+
 v1.2.1 :
   - Accelerometer improved to drive the car
   - French mistake on leaving game question

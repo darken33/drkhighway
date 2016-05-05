@@ -27,7 +27,7 @@ function service(score) {
 	var key = "5f41236c78401a027cabea54f66ed4b2";
 	var name = game_options.name;
 	var score = score;
-	var url = "http://darken33.free.fr/drkhighway/services/score_service.php?key="+key+"&name="+name+"&score="+score+"&date="+txd;
+	var url = "http://darken33.net/applications/services/drkhighway/score_service.php?key="+key+"&name="+name+"&score="+score+"&date="+txd;
 	$.getJSON(url, function(data) {
 		fillHighscores(data);
 	}).fail(function() { 
